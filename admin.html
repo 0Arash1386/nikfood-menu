@@ -1,22 +1,54 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>پنل مدیریت نیک فود</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-config.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>پنل مدیریت نیک فود</title>
+
+<link rel="stylesheet" href="admin.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
 
 </head>
 
 <body>
 
+<div class="sidebar">
+
+<h2>🍔 Nik Food</h2>
+
+<button class="menu active">🏠 داشبورد</button>
+<button class="menu">🍔 غذاها</button>
+<button class="menu">📂 دسته بندی</button>
+<button class="menu">⚙️ تنظیمات</button>
+
+</div>
+
+<div class="content">
+
 <h1>پنل مدیریت نیک فود</h1>
 
-<button id="addFood">➕ افزودن غذا</button>
+<div class="card">
+
+<h2>افزودن غذا</h2>
+
+<input id="name" placeholder="نام غذا">
+
+<input id="category" placeholder="دسته بندی">
+
+<input id="price" placeholder="قیمت">
+
+<textarea id="ingredients" placeholder="ترکیبات"></textarea>
+
+<button id="save">💾 ذخیره غذا</button>
+
+</div>
 
 <div id="foods"></div>
+
+</div>
 
 <script src="admin.js"></script>
 
