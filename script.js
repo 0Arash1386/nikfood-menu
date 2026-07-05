@@ -1,12 +1,11 @@
-// داده‌های منو - این فایل رو راحت می‌تونی ویرایش کنی
 const foods = [
     {
         id: 1,
         name: "بوفالو وینگز",
         category: "سوخاری",
         price: 185000,
-        desc: "بال مرغ تند و خوشمزه با سس بوفالو",
-        image: "assets/images/foods/buffalo-wings.jpg"
+        desc: "بال مرغ تند با سس بوفالو",
+        image: "images/buffalo-wings.jpg"
     },
     {
         id: 2,
@@ -14,15 +13,15 @@ const foods = [
         category: "سوخاری",
         price: 185000,
         desc: "بال مرغ با سس عسل و خردل",
-        image: "assets/images/foods/honey-mustard.jpg"
+        image: "images/honey-mustard.jpg"
     },
     {
         id: 3,
         name: "نیک برگر",
         category: "ساندویچ",
         price: 210000,
-        desc: "برگر مخصوص نیک فود با مواد تازه",
-        image: "assets/images/foods/nik-burger.jpg"
+        desc: "برگر مخصوص نیک فود",
+        image: "images/nik-burger.jpg"
     },
     {
         id: 4,
@@ -30,23 +29,23 @@ const foods = [
         category: "ساندویچ",
         price: 195000,
         desc: "برگر با پنیر ذوب شده",
-        image: "assets/images/foods/cheese-burger.jpg"
+        image: "images/cheese-burger.jpg"
     },
     {
         id: 5,
         name: "پیتزا پپرونی",
         category: "پیتزا",
         price: 245000,
-        desc: "پپرونی، پنیر موزارلا و سس مخصوص",
-        image: "assets/images/foods/pepperoni-pizza.jpg"
+        desc: "پپرونی و پنیر موزارلا",
+        image: "images/pepperoni-pizza.jpg"
     },
     {
         id: 6,
         name: "استیک مرغ",
         category: "گریل سلامت",
         price: 165000,
-        desc: "فیله مرغ گریل شده با سبزیجات",
-        image: "assets/images/foods/chicken-steak.jpg"
+        desc: "فیله مرغ گریل با سبزیجات",
+        image: "images/chicken-steak.jpg"
     },
     {
         id: 7,
@@ -54,21 +53,20 @@ const foods = [
         category: "پیش غذا",
         price: 85000,
         desc: "سیب زمینی طلایی و ترد",
-        image: "assets/images/foods/fries.jpg"
+        image: "images/fries.jpg"
     },
     {
         id: 8,
         name: "سالاد سزار",
         category: "سالاد",
         price: 95000,
-        desc: "کاهو، مرغ گریل و سس سزار",
-        image: "assets/images/foods/caesar-salad.jpg"
+        desc: "کاهو، مرغ و سس سزار",
+        image: "images/caesar-salad.jpg"
     }
 ];
 
 const categories = ["همه", "پیتزا", "ساندویچ", "سوخاری", "گریل سلامت", "پیش غذا", "سالاد", "سس ها"];
 
-// رندر دسته‌بندی‌ها
 function renderCategories() {
     const container = document.getElementById('categories');
     container.innerHTML = '';
@@ -84,17 +82,15 @@ function renderCategories() {
             btn.classList.add('active');
             filterByCategory(cat);
         });
-        
         container.appendChild(btn);
     });
 }
 
-// رندر غذاها
-function renderMenu(filteredFoods) {
+function renderMenu(filtered) {
     const container = document.getElementById('menuGrid');
     container.innerHTML = '';
     
-    filteredFoods.forEach(food => {
+    filtered.forEach(food => {
         const card = document.createElement('div');
         card.className = 'food-card';
         card.innerHTML = `
@@ -109,20 +105,17 @@ function renderMenu(filteredFoods) {
     });
 }
 
-// فیلتر بر اساس دسته
-function filterByCategory(category) {
+function filterByCategory(cat) {
     let filtered = foods;
-    if (category !== "همه") {
-        filtered = foods.filter(food => food.category === category);
+    if (cat !== "همه") {
+        filtered = foods.filter(f => f.category === cat);
     }
     renderMenu(filtered);
 }
 
-// جستجو
 function setupSearch() {
-    const searchInput = document.getElementById('searchInput');
-    searchInput.addEventListener('input', () => {
-        const term = searchInput.value.trim().toLowerCase();
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
         const filtered = foods.filter(food => 
             food.name.toLowerCase().includes(term) || 
             food.desc.toLowerCase().includes(term)
@@ -131,20 +124,15 @@ function setupSearch() {
     });
 }
 
-// لودینگ
 function hideLoading() {
     const loading = document.getElementById('loading');
     loading.style.opacity = '0';
     setTimeout(() => loading.style.display = 'none', 600);
 }
 
-// شروع برنامه
-function init() {
+window.onload = () => {
     renderCategories();
     renderMenu(foods);
     setupSearch();
     hideLoading();
-}
-
-// اجرای برنامه
-window.onload = init;
+};
