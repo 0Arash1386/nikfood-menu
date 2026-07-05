@@ -1,21 +1,31 @@
 :root {
     --primary: #9DC183;
     --dark: #0f0f0f;
-    --card-bg: #1a1a1a;
+    --card: #1a1a1a;
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
     font-family: 'Vazirmatn', sans-serif;
     background: var(--dark);
     color: white;
+    line-height: 1.6;
 }
 
-.container { max-width: 1300px; margin:0 auto; padding:0 15px; }
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
 
+/* Header */
 header {
-    background: rgba(15,15,15,0.97);
+    background: rgba(15, 15, 15, 0.97);
     position: fixed;
     width: 100%;
     z-index: 1000;
@@ -28,15 +38,15 @@ nav {
 }
 
 .logo img {
-    height: 85px;
+    height: 80px;
     width: auto;
 }
 
 /* Hero */
 .hero {
     height: 65vh;
-    background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.8)), 
-                url('https://picsum.photos/id/1080/1920/1080') center/cover;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.75)), 
+                url('images/hero-bg.jpg') center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -49,8 +59,10 @@ nav {
     margin-bottom: 10px;
 }
 
-/* Menu */
-.menu-section { padding: 100px 0; }
+/* Menu Section */
+.menu-section {
+    padding: 100px 0;
+}
 
 .section-title {
     text-align: center;
@@ -104,7 +116,7 @@ nav {
 .cat-btn.active,
 .cat-btn:hover {
     background: var(--primary);
-    color: #000;
+    color: black;
     font-weight: 600;
 }
 
@@ -115,7 +127,7 @@ nav {
 }
 
 .food-card {
-    background: var(--card-bg);
+    background: var(--card);
     border-radius: 20px;
     overflow: hidden;
     transition: 0.4s;
@@ -123,7 +135,7 @@ nav {
 
 .food-card:hover {
     transform: translateY(-12px);
-    box-shadow: 0 15px 30px rgba(157, 193, 131, 0.2);
+    box-shadow: 0 15px 30px rgba(157, 193, 131, 0.25);
 }
 
 .food-card img {
@@ -145,11 +157,12 @@ nav {
     color: var(--primary);
     font-size: 1.55rem;
     font-weight: 700;
+    margin: 12px 0;
 }
 
 footer {
     text-align: center;
     padding: 50px 0;
     background: #0a0a0a;
-    color: #bbb;
+    color: #ccc;
 }
