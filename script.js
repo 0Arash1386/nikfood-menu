@@ -1,82 +1,150 @@
-const menu = {
-fried:[
-{name:"بوفالو وینگز",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"بال سوخاری با سس بوفالو"},
-{name:"هانی موستارد وینگز",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"بال سوخاری با سس هانی موستارد"},
-{name:"باربیکیو وینگز",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"بال سوخاری با سس باربیکیو"},
-{name:"نرمال وینگز",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"بال سوخاری کلاسیک"},
-{name:"فیله استریپس",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"فیله مرغ سوخاری"}
-],
+// داده‌های منو - این فایل رو راحت می‌تونی ویرایش کنی
+const foods = [
+    {
+        id: 1,
+        name: "بوفالو وینگز",
+        category: "سوخاری",
+        price: 185000,
+        desc: "بال مرغ تند و خوشمزه با سس بوفالو",
+        image: "assets/images/foods/buffalo-wings.jpg"
+    },
+    {
+        id: 2,
+        name: "هانی موستارد وینگز",
+        category: "سوخاری",
+        price: 185000,
+        desc: "بال مرغ با سس عسل و خردل",
+        image: "assets/images/foods/honey-mustard.jpg"
+    },
+    {
+        id: 3,
+        name: "نیک برگر",
+        category: "ساندویچ",
+        price: 210000,
+        desc: "برگر مخصوص نیک فود با مواد تازه",
+        image: "assets/images/foods/nik-burger.jpg"
+    },
+    {
+        id: 4,
+        name: "چیز برگر",
+        category: "ساندویچ",
+        price: 195000,
+        desc: "برگر با پنیر ذوب شده",
+        image: "assets/images/foods/cheese-burger.jpg"
+    },
+    {
+        id: 5,
+        name: "پیتزا پپرونی",
+        category: "پیتزا",
+        price: 245000,
+        desc: "پپرونی، پنیر موزارلا و سس مخصوص",
+        image: "assets/images/foods/pepperoni-pizza.jpg"
+    },
+    {
+        id: 6,
+        name: "استیک مرغ",
+        category: "گریل سلامت",
+        price: 165000,
+        desc: "فیله مرغ گریل شده با سبزیجات",
+        image: "assets/images/foods/chicken-steak.jpg"
+    },
+    {
+        id: 7,
+        name: "سیب زمینی سرخ کرده",
+        category: "پیش غذا",
+        price: 85000,
+        desc: "سیب زمینی طلایی و ترد",
+        image: "assets/images/foods/fries.jpg"
+    },
+    {
+        id: 8,
+        name: "سالاد سزار",
+        category: "سالاد",
+        price: 95000,
+        desc: "کاهو، مرغ گریل و سس سزار",
+        image: "assets/images/foods/caesar-salad.jpg"
+    }
+];
 
-burger:[
-{name:"نیک برگر",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"برگر مخصوص نیک فود"},
-{name:"اسمش برگر",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"برگر ویژه"},
-{name:"همبرگر",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"همبرگر کلاسیک"},
-{name:"چیز برگر",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"همبرگر با پنیر"},
-{name:"ماشروم برگر",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"برگر با قارچ"},
-{name:"فیله برگر",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"برگر فیله مرغ"}
-],
+const categories = ["همه", "پیتزا", "ساندویچ", "سوخاری", "گریل سلامت", "پیش غذا", "سالاد", "سس ها"];
 
-pizza:[
-{name:"نیک پیتزا",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"پیتزای مخصوص نیک فود"},
-{name:"پپرونی",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"پیتزا پپرونی"}
-],
-
-grill:[
-{name:"استیک مرغ",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"استیک مرغ گریل"},
-{name:"فیله گریل",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"فیله مرغ گریل"}
-],
-
-starter:[
-{name:"سیب زمینی",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"سیب زمینی سرخ شده"},
-{name:"وایت فرایز",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"وایت فرایز"}
-],
-
-salad:[
-{name:"سالاد نیک",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"سالاد مخصوص"},
-{name:"سزار سوخاری",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"سالاد سزار"}
-],
-
-sauce:[
-{name:"سس قارچ",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"سس قارچ"},
-{name:"سس چدار",price:"بزودی",image:"assets/images/placeholder.jpg",desc:"سس چدار"}
-]
-};
-
-function render(id,data){
-const box=document.getElementById(id);
-
-data.forEach(food=>{
-
-box.innerHTML+=`
-<div class="food-card" onclick="showFood('${food.name}','${food.price}','${food.image}','${food.desc}')">
-<img src="${food.image}">
-<h3>${food.name}</h3>
-<span>${food.price}</span>
-</div>
-`;
-
-});
+// رندر دسته‌بندی‌ها
+function renderCategories() {
+    const container = document.getElementById('categories');
+    container.innerHTML = '';
+    
+    categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'cat-btn';
+        btn.textContent = cat;
+        if (cat === "همه") btn.classList.add('active');
+        
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            filterByCategory(cat);
+        });
+        
+        container.appendChild(btn);
+    });
 }
 
-render("fried",menu.fried);
-render("burger",menu.burger);
-render("pizza",menu.pizza);
-render("grill",menu.grill);
-render("starter",menu.starter);
-render("salad",menu.salad);
-render("sauce",menu.sauce);
-
-function showFood(name,price,image,desc){
-
-document.getElementById("modal").style.display="block";
-
-document.getElementById("foodName").innerText=name;
-document.getElementById("foodPrice").innerText=price;
-document.getElementById("foodDesc").innerText=desc;
-document.getElementById("foodImage").src=image;
-
+// رندر غذاها
+function renderMenu(filteredFoods) {
+    const container = document.getElementById('menuGrid');
+    container.innerHTML = '';
+    
+    filteredFoods.forEach(food => {
+        const card = document.createElement('div');
+        card.className = 'food-card';
+        card.innerHTML = `
+            <img src="${food.image}" alt="${food.name}">
+            <div class="card-body">
+                <h3>${food.name}</h3>
+                <p>${food.desc}</p>
+                <div class="price">${food.price.toLocaleString('fa-IR')} تومان</div>
+            </div>
+        `;
+        container.appendChild(card);
+    });
 }
 
-document.getElementById("close").onclick=()=>{
-document.getElementById("modal").style.display="none";
-  }
+// فیلتر بر اساس دسته
+function filterByCategory(category) {
+    let filtered = foods;
+    if (category !== "همه") {
+        filtered = foods.filter(food => food.category === category);
+    }
+    renderMenu(filtered);
+}
+
+// جستجو
+function setupSearch() {
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', () => {
+        const term = searchInput.value.trim().toLowerCase();
+        const filtered = foods.filter(food => 
+            food.name.toLowerCase().includes(term) || 
+            food.desc.toLowerCase().includes(term)
+        );
+        renderMenu(filtered);
+    });
+}
+
+// لودینگ
+function hideLoading() {
+    const loading = document.getElementById('loading');
+    loading.style.opacity = '0';
+    setTimeout(() => loading.style.display = 'none', 600);
+}
+
+// شروع برنامه
+function init() {
+    renderCategories();
+    renderMenu(foods);
+    setupSearch();
+    hideLoading();
+}
+
+// اجرای برنامه
+window.onload = init;
