@@ -1,72 +1,26 @@
+// عکس‌های اسلایدر (می‌تونی اضافه یا کم کنی)
+const sliderImages = [
+    "images/slide1.jpg",
+    "images/slide2.jpg",
+    "images/slide3.jpg",
+    "images/slide4.jpg"
+];
+
+// غذاها
 const foods = [
-    {
-        id: 1,
-        name: "بوفالو وینگز",
-        category: "سوخاری",
-        price: 185000,
-        desc: "بال مرغ تند با سس بوفالو",
-        image: "images/buffalo-wings.jpg"
-    },
-    {
-        id: 2,
-        name: "هانی موستارد وینگز",
-        category: "سوخاری",
-        price: 185000,
-        desc: "بال مرغ با سس عسل و خردل",
-        image: "images/honey-mustard.jpg"
-    },
-    {
-        id: 3,
-        name: "نیک برگر",
-        category: "ساندویچ",
-        price: 210000,
-        desc: "برگر مخصوص نیک فود",
-        image: "images/nik-burger.jpg"
-    },
-    {
-        id: 4,
-        name: "چیز برگر",
-        category: "ساندویچ",
-        price: 195000,
-        desc: "برگر با پنیر ذوب شده",
-        image: "images/cheese-burger.jpg"
-    },
-    {
-        id: 5,
-        name: "پیتزا پپرونی",
-        category: "پیتزا",
-        price: 245000,
-        desc: "پپرونی و پنیر موزارلا",
-        image: "images/pepperoni-pizza.jpg"
-    },
-    {
-        id: 6,
-        name: "استیک مرغ",
-        category: "گریل سلامت",
-        price: 165000,
-        desc: "فیله مرغ گریل با سبزیجات",
-        image: "images/chicken-steak.jpg"
-    },
-    {
-        id: 7,
-        name: "سیب زمینی سرخ کرده",
-        category: "پیش غذا",
-        price: 85000,
-        desc: "سیب زمینی طلایی و ترد",
-        image: "images/fries.jpg"
-    },
-    {
-        id: 8,
-        name: "سالاد سزار",
-        category: "سالاد",
-        price: 95000,
-        desc: "کاهو، مرغ و سس سزار",
-        image: "images/caesar-salad.jpg"
-    }
+    { id:1, name:"بوفالو وینگز", category:"سوخاری", price:185000, desc:"بال مرغ تند و خوشمزه", image:"images/buffalo-wings.jpg" },
+    { id:2, name:"هانی موستارد وینگز", category:"سوخاری", price:185000, desc:"بال مرغ با سس عسل و خردل", image:"images/honey-mustard.jpg" },
+    { id:3, name:"نیک برگر", category:"ساندویچ", price:210000, desc:"برگر مخصوص نیک فود", image:"images/nik-burger.jpg" },
+    { id:4, name:"چیز برگر", category:"ساندویچ", price:195000, desc:"برگر با پنیر ذوب شده", image:"images/cheese-burger.jpg" },
+    { id:5, name:"پیتزا پپرونی", category:"پیتزا", price:245000, desc:"پپرونی و پنیر موزارلا", image:"images/pepperoni-pizza.jpg" },
+    { id:6, name:"استیک مرغ", category:"گریل سلامت", price:165000, desc:"فیله مرغ گریل با سبزیجات", image:"images/chicken-steak.jpg" },
+    { id:7, name:"سیب زمینی سرخ کرده", category:"پیش غذا", price:85000, desc:"سیب زمینی طلایی و ترد", image:"images/fries.jpg" },
+    { id:8, name:"سالاد سزار", category:"سالاد", price:95000, desc:"کاهو، مرغ و سس سزار", image:"images/caesar-salad.jpg" }
 ];
 
 const categories = ["همه", "پیتزا", "ساندویچ", "سوخاری", "گریل سلامت", "پیش غذا", "سالاد", "سس ها"];
 
+// رندر دسته‌بندی
 function renderCategories() {
     const container = document.getElementById('categories');
     container.innerHTML = '';
@@ -86,13 +40,15 @@ function renderCategories() {
     });
 }
 
+// رندر غذاها
 function renderMenu(filtered) {
     const container = document.getElementById('menuGrid');
     container.innerHTML = '';
     
-    filtered.forEach(food => {
+    filtered.forEach((food, index) => {
         const card = document.createElement('div');
         card.className = 'food-card';
+        card.style.animationDelay = `${index * 0.1}s`;
         card.innerHTML = `
             <img src="${food.image}" alt="${food.name}">
             <div class="card-body">
@@ -105,6 +61,7 @@ function renderMenu(filtered) {
     });
 }
 
+// فیلتر دسته‌بندی
 function filterByCategory(cat) {
     let filtered = foods;
     if (cat !== "همه") {
@@ -113,6 +70,7 @@ function filterByCategory(cat) {
     renderMenu(filtered);
 }
 
+// جستجو
 function setupSearch() {
     document.getElementById('searchInput').addEventListener('input', (e) => {
         const term = e.target.value.toLowerCase();
@@ -124,15 +82,37 @@ function setupSearch() {
     });
 }
 
+// اسلایدر خودکار
+let currentSlide = 0;
+function startSlider() {
+    const slidesContainer = document.getElementById('slides');
+    slidesContainer.innerHTML = '';
+    
+    sliderImages.forEach(src => {
+        const slide = document.createElement('div');
+        slide.className = 'slide';
+        slide.style.backgroundImage = `url('${src}')`;
+        slidesContainer.appendChild(slide);
+    });
+    
+    setInterval(() => {
+        currentSlide = (currentSlide + 1) % sliderImages.length;
+        slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }, 4000);
+}
+
+// لودینگ
 function hideLoading() {
     const loading = document.getElementById('loading');
     loading.style.opacity = '0';
     setTimeout(() => loading.style.display = 'none', 600);
 }
 
+// شروع
 window.onload = () => {
     renderCategories();
     renderMenu(foods);
     setupSearch();
+    startSlider();
     hideLoading();
 };
