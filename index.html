@@ -1,73 +1,56 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>نیک فود</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
-</head>
-
-<body>
-
-<header>
-    <img src="assets/logo.png" class="logo">
-    <h1>نیک فود</h1>
-    <p>غذای خوب، حال خوب</p>
-</header>
-
-<div class="search-box">
-<input type="text" id="search" placeholder="جستجوی غذا...">
-</div>
-
-<section>
-
-<h2>🍗 سوخاری</h2>
-<div id="fried" class="foods"></div>
-
-<h2>🍔 برگر</h2>
-<div id="burger" class="foods"></div>
-
-<h2>🍕 پیتزا</h2>
-<div id="pizza" class="foods"></div>
-
-<h2>🥩 گریل سلامت</h2>
-<div id="grill" class="foods"></div>
-
-<h2>🍟 پیش غذا</h2>
-<div id="starter" class="foods"></div>
-
-<h2>🥗 سالاد</h2>
-<div id="salad" class="foods"></div>
-
-<h2>🧀 سس ها</h2>
-<div id="sauce" class="foods"></div>
-
-</section>
-
-<div id="modal" class="modal">
-
-<div class="modal-content">
-
-<span id="close">&times;</span>
-
-<img id="foodImage">
-
-<h2 id="foodName"></h2>
-
-<p id="foodDesc"></p>
-
-<p id="foodPrice"></p>
-
-</div>
-
-</div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نیک فود - منوی آنلاین</title>
     
-<script src="foods.js"></script>
-<script src="script.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="loading" id="loading">در حال بارگذاری منو...</div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="assets/images/logo.png" alt="نیک فود">
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>منوی نیک فود</h1>
+            <p>Pizza & Sandwich</p>
+        </div>
+    </section>
+
+    <section class="menu-section">
+        <div class="container">
+            <h2 class="section-title">منوی ما</h2>
+            
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="جستجوی غذا...">
+            </div>
+            
+            <div class="categories" id="categories"></div>
+            
+            <div class="menu-grid" id="menuGrid"></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p><strong>شماره تماس:</strong> <span id="phone">021-12345678</span></p>
+            <p>© ۱۴۰۵ رستوران نیک فود</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
