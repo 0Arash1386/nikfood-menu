@@ -8,7 +8,7 @@ function showToast(message, color = "#16a34a") {
 
   setTimeout(() => {
     toast.style.display = "none";
-  }, 2500);
+  }, 3000);
 }
 
 async function loadFoods() {
@@ -19,6 +19,7 @@ async function loadFoods() {
     .order("id", { ascending: false });
 
   if (error) {
+    console.error(error);
     showToast(error.message, "#dc2626");
     return;
   }
@@ -38,16 +39,17 @@ async function loadFoods() {
 
         <p>${food.ingredients || ""}</p>
 
-        <button
-          class="delete-btn"
-          onclick="deleteFood(${food.id})">
-
-          حذف
-
+        <button class="delete-btn" onclick="deleteFood(${food.id})">
+          🗑 حذف
         </button>
 
       </div>
     `;
+
+  });
+
+}
+
 async function deleteFood(id) {
 
   if (!confirm("از حذف این غذا مطمئنی؟")) return;
@@ -58,6 +60,7 @@ async function deleteFood(id) {
     .eq("id", id);
 
   if (error) {
+    console.error(error);
     showToast(error.message, "#dc2626");
     return;
   }
@@ -84,11 +87,11 @@ document.getElementById("save").addEventListener("click", async () => {
     .from("foods")
     .insert([
       {
-        name,
-        category,
-        price,
+        name: name,
+        category: category,
+        price: price,
         description: "",
-        ingredients,
+        ingredients: ingredients,
         image: "",
         available: true,
         featured: false
@@ -110,18 +113,16 @@ document.getElementById("save").addEventListener("click", async () => {
   loadFoods();
 
 });
- // بارگذاری اولیه غذاها
-loadFoods();
 
-// دکمه بروزرسانی (اگر در HTML وجود داشته باشد)
 const reloadBtn = document.getElementById("reload");
 
 if (reloadBtn) {
+
   reloadBtn.addEventListener("click", () => {
     loadFoods();
-    showToast("لیست بروزرسانی شد 🔄");
-  });
-}   
+    showToast("بروزرسانی شد");
   });
 
 }
+
+loadFoods();
