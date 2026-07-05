@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>پنل مدیریت نیک فود</title>
+
+<link rel="stylesheet" href="admin.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+
+</head>
+
+<body>
+
+<div id="toast"></div>
+
+<aside class="sidebar">
+
+<div class="logo">
+
+🍔
+
+<h2>Nik Food</h2>
+
+</div>
+
+<nav>
+
+<button class="nav-btn active">
+🏠 داشبورد
+</button>
+
+<button class="nav-btn">
+🍔 غذاها
+</button>
+
+<button class="nav-btn">
+📂 دسته بندی ها
+</button>
+
+<button class="nav-btn">
+📷 تصاویر
+</button>
+
+<button class="nav-btn">
+⚙ تنظیمات
+</button>
+
+</nav>
+
+</aside>
+
+<main class="content">
+
+<header>
+
+<h1>
+
+پنل مدیریت نیک فود
+
+</h1>
+
+<div class="top-buttons">
+
+<button id="reload">
+
+🔄 بروزرسانی
+
+</button>
+
+</div>
+
+</header>
+
+<section class="card">
+
+<h2>
+
+➕ افزودن غذا
+
+</h2>
+
+<div class="grid">
+
+<input
+id="name"
+placeholder="نام غذا">
+
+<select id="category">
+
+<option>برگر</option>
+
+<option>سوخاری</option>
+
+<option>پیتزا</option>
+
+<option>گریل</option>
+
+<option>سالاد</option>
+
+<option>پیش غذا</option>
+
+<option>سس</option>
+
+</select>
+
+<input
+id="price"
+type="number"
+placeholder="قیمت">
+
+<textarea
+id="ingredients"
+placeholder="ترکیبات غذا"></textarea>
+
+</div>
+
+<button id="save">
+
+💾 ذخیره غذا
+
+</button>
+
+</section>
+
+<section>
+
+<h2>
+
+📋 لیست غذاها
+
+</h2>
+
+<div id="foods"></div>
+
+</section>
+
+</main>
+
+<script src="admin.js"></script>
+
+</body>
+
+</html>
