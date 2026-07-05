@@ -1,8 +1,8 @@
 const foodsDiv = document.getElementById("foods");
 const toast = document.getElementById("toast");
 
-function showToast(text, color = "#16a34a") {
-  toast.innerText = text;
+function showToast(message, color = "#16a34a") {
+  toast.innerText = message;
   toast.style.background = color;
   toast.style.display = "block";
 
@@ -13,7 +13,7 @@ function showToast(text, color = "#16a34a") {
 
 async function loadFoods() {
 
-  const { data, error } = await supabase
+  const { data, error } = await db
     .from("foods")
     .select("*")
     .order("id", { ascending: false });
@@ -28,115 +28,100 @@ async function loadFoods() {
   data.forEach(food => {
 
     foodsDiv.innerHTML += `
+      <div class="food-card">
 
-    <div class="food-card">
+        <h3>${food.name}</h3>
 
-      <h3>${food.name}</h3>
+        <p>🍔 دسته: ${food.category}</p>
 
-      <p>دسته : ${food.category}</p>
+        <p>💰 ${Number(food.price).toLocaleString()} تومان</p>
 
-      <p>قیمت : ${food.price.toLocaleString()} تومان</p>
+        <p>${food.ingredients || ""}</p>
 
-      <p>${food.ingredients || ""}</p>
+        <button
+          class="delete-btn"
+          onclick="deleteFood(${food.id})">
 
-      <button class="delete-btn"
-      onclick="deleteFood(${food.id})">
+          حذف
 
-      حذف
+        </button>
 
-      </button>
-
-    </div>
-
+      </div>
     `;
+async function deleteFood(id) {
 
+  if (!confirm("از حذف این غذا مطمئنی؟")) return;
+
+  const { error } = await db
+    .from("foods")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    showToast(error.message, "#dc2626");
+    return;
+  }
+
+  showToast("غذا حذف شد ✅");
+
+  loadFoods();
+
+}
+
+document.getElementById("save").addEventListener("click", async () => {
+
+  const name = document.getElementById("name").value.trim();
+  const category = document.getElementById("category").value;
+  const price = Number(document.getElementById("price").value) || 0;
+  const ingredients = document.getElementById("ingredients").value.trim();
+
+  if (!name) {
+    showToast("نام غذا را وارد کنید", "#dc2626");
+    return;
+  }
+
+  const { error } = await db
+    .from("foods")
+    .insert([
+      {
+        name,
+        category,
+        price,
+        description: "",
+        ingredients,
+        image: "",
+        available: true,
+        featured: false
+      }
+    ]);
+
+  if (error) {
+    console.error(error);
+    showToast(error.message, "#dc2626");
+    return;
+  }
+
+  showToast("غذا با موفقیت اضافه شد 🎉");
+
+  document.getElementById("name").value = "";
+  document.getElementById("price").value = "";
+  document.getElementById("ingredients").value = "";
+
+  loadFoods();
+
+});
+ // بارگذاری اولیه غذاها
+loadFoods();
+
+// دکمه بروزرسانی (اگر در HTML وجود داشته باشد)
+const reloadBtn = document.getElementById("reload");
+
+if (reloadBtn) {
+  reloadBtn.addEventListener("click", () => {
+    loadFoods();
+    showToast("لیست بروزرسانی شد 🔄");
+  });
+}   
   });
 
 }
-
-async function deleteFood(id){
-
-const ok = confirm("حذف شود؟");
-
-if(!ok) return;
-
-const {error} = await supabase
-.from("foods")
-.delete()
-.eq("id",id);
-
-if(error){
-
-showToast(error.message,"#dc2626");
-return;
-
-}
-
-showToast("غذا حذف شد");
-
-loadFoods();
-
-}
-
-document.getElementById("save").addEventListener("click", async ()=>{
-
-const name=document.getElementById("name").value.trim();
-
-const price=document.getElementById("price").value;
-
-const category=document.getElementById("category").value;
-
-const ingredients=document.getElementById("ingredients").value;
-
-if(name===""){
-
-showToast("نام غذا را وارد کنید","#dc2626");
-return;
-
-}
-
-const {error}=await supabase
-
-.from("foods")
-
-.insert({
-
-name:name,
-
-category:category,
-
-price:Number(price)||0,
-
-description:"",
-
-ingredients:ingredients,
-
-image:"",
-
-available:true,
-
-featured:false
-
-});
-
-if(error){
-
-console.error(error);
-
-showToast(error.message,"#dc2626");
-
-return;
-
-}
-
-showToast("غذا اضافه شد");
-
-document.getElementById("name").value="";
-document.getElementById("price").value="";
-document.getElementById("ingredients").value="";
-
-loadFoods();
-
-});
-
-loadFoods();
