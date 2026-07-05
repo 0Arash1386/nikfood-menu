@@ -1,9 +1,9 @@
 // ==================== اسلایدر ====================
 const sliderImages = [
     "images/slide1.jpg",
-    "images/slide2.jpg",
-    "images/slide3.jpg",
-    "images/slide4.jpg"
+    "images/slide2.png",
+    "images/slide3.png",
+    "images/slide4.png"
 ];
 
 let currentSlide = 0;
