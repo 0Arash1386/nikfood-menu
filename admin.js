@@ -83,64 +83,33 @@ loadFoods();
 
 }
 
-document.getElementById("save").onclick=async()=>{
+document.getElementById("save").onclick = async () => {
 
-const name=document.getElementById("name").value.trim();
+  const food = {
+    name: document.getElementById("name").value.trim(),
+    category: document.getElementById("category").value,
+    price: Number(document.getElementById("price").value) || 0,
+    description: "",
+    ingredients: document.getElementById("ingredients").value,
+    image: "",
+    available: true,
+    featured: false
+  };
 
-const category=document.getElementById("category").value;
+  const { data, error } = await supabase
+    .from("foods")
+    .insert([food])
+    .select();
 
-const price=document.getElementById("price").value;
+  if (error) {
+    console.error(error);
+    showToast(error.message, "error");
+    return;
+  }
 
-const ingredients=document.getElementById("ingredients").value;
+  console.log(data);
 
-if(name===""||price===""){
+  showToast("غذا با موفقیت اضافه شد 🎉");
 
-showToast("همه فیلدهای ضروری را پر کن","error");
-
-return;
-
-}
-
-const {error}=await supabase
-.from("foods")
-.insert([{
-
-name,
-
-category,
-
-price:Number(price),
-
-ingredients
-
-}]);
-
-if(error){
-
-showToast(error.message,"error");
-
-return;
-
-}
-
-showToast("غذا با موفقیت اضافه شد 🎉");
-
-document.getElementById("name").value="";
-
-document.getElementById("price").value="";
-
-document.getElementById("ingredients").value="";
-
-loadFoods();
-
+  loadFoods();
 };
-
-document.getElementById("reload").onclick=()=>{
-
-loadFoods();
-
-showToast("اطلاعات بروزرسانی شد");
-
-};
-
-loadFoods();
