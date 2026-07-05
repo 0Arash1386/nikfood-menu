@@ -8,7 +8,7 @@ const sliderImages = [
     "images/slide6.jpg",
     "images/slide7.jpg",
     "images/slide8.jpg",
-    "images/slide9.jpg"
+    "images/slide9.jpg",
     "images/slide10.jpg"
 ];
 
