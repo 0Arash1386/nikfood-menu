@@ -1,9 +1,8 @@
-// عکس‌های اسلایدر (می‌تونی اضافه یا کم کنی)
+// اسلایدر
 const sliderImages = [
     "images/slide1.jpg",
     "images/slide2.jpg",
-    "images/slide3.jpg",
-    "images/slide4.jpg"
+    "images/slide3.jpg"
 ];
 
 // غذاها
@@ -61,47 +60,41 @@ function renderMenu(filtered) {
     });
 }
 
-// فیلتر دسته‌بندی
 function filterByCategory(cat) {
     let filtered = foods;
-    if (cat !== "همه") {
-        filtered = foods.filter(f => f.category === cat);
-    }
+    if (cat !== "همه") filtered = foods.filter(f => f.category === cat);
     renderMenu(filtered);
 }
 
-// جستجو
 function setupSearch() {
     document.getElementById('searchInput').addEventListener('input', (e) => {
         const term = e.target.value.toLowerCase();
         const filtered = foods.filter(food => 
-            food.name.toLowerCase().includes(term) || 
-            food.desc.toLowerCase().includes(term)
+            food.name.toLowerCase().includes(term) || food.desc.toLowerCase().includes(term)
         );
         renderMenu(filtered);
     });
 }
 
-// اسلایدر خودکار
+// اسلایدر
 let currentSlide = 0;
 function startSlider() {
-    const slidesContainer = document.getElementById('slides');
-    slidesContainer.innerHTML = '';
+    const container = document.getElementById('slides');
+    container.innerHTML = '';
     
     sliderImages.forEach(src => {
         const slide = document.createElement('div');
         slide.className = 'slide';
         slide.style.backgroundImage = `url('${src}')`;
-        slidesContainer.appendChild(slide);
+        container.appendChild(slide);
     });
     
     setInterval(() => {
         currentSlide = (currentSlide + 1) % sliderImages.length;
-        slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+        container.style.transform = `translateX(-${currentSlide * 100}%)`;
     }, 4000);
 }
 
-// لودینگ
 function hideLoading() {
     const loading = document.getElementById('loading');
     loading.style.opacity = '0';
