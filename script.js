@@ -19,47 +19,18 @@ function startSlider() {
         container.appendChild(slide);
     });
 
-    // Auto Slide
     setInterval(() => {
         currentSlide = (currentSlide + 1) % sliderImages.length;
         container.style.transform = `translateX(-${currentSlide * 100}%)`;
     }, 4000);
 }
 
-    // Swipe Support
-    sliderContainer.addEventListener('touchstart', e => {
-        isDragging = true;
-        startX = e.touches[0].clientX;
-    });
-
-    sliderContainer.addEventListener('touchend', e => {
-        if (!isDragging) return;
-        const endX = e.changedTouches[0].clientX;
-        const diff = startX - endX;
-
-        if (diff > 50) nextSlide();
-        else if (diff < -50) prevSlide();
-
-        isDragging = false;
-    });
-
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % sliderImages.length;
-        container.style.transform = `translateX(-${currentSlide * 100}%)`;
-    }
-
-    function prevSlide() {
-        currentSlide = (currentSlide - 1 + sliderImages.length) % sliderImages.length;
-        container.style.transform = `translateX(-${currentSlide * 100}%)`;
-    }
-}
-
-// ==================== غذاها (همه آیتم‌ها) ====================
+// ==================== همه غذاها ====================
 const foods = [
     // سوخاری
     { id:1, name:"بوفالو وینگز", category:"سوخاری", price:558000, desc:"بال مرغ تند", image:"images/buffalo-wings.jpg" },
-    { id:2, name:"هانی موستارد وینگز", category:"سوخاری", price:558000, desc:"بال مرغ با سس عسل و خردل", image:"images/honey-mustard.jpg" },
-    { id:3, name:"باربیکیو وینگز", category:"سوخاری", price:558000, desc:"بال مرغ با سس باربیکیو", image:"images/bbq-wings.jpg" },
+    { id:2, name:"هانی موستارد وینگز", category:"سوخاری", price:558000, desc:"بال مرغ عسل و خردل", image:"images/honey-mustard.jpg" },
+    { id:3, name:"باربیکیو وینگز", category:"سوخاری", price:558000, desc:"بال مرغ باربیکیو", image:"images/bbq-wings.jpg" },
     { id:4, name:"نرمال وینگز", category:"سوخاری", price:558000, desc:"بال مرغ معمولی", image:"images/normal-wings.jpg" },
     { id:5, name:"فیله استریپس", category:"سوخاری", price:988000, desc:"فیله مرغ سوخاری", image:"images/fillet-strips.jpg" },
 
@@ -67,12 +38,12 @@ const foods = [
     { id:6, name:"نیک برگر", category:"ساندویچ", price:958000, desc:"برگر مخصوص نیک فود", image:"images/nik-burger.jpg" },
     { id:7, name:"همبرگر", category:"ساندویچ", price:878000, desc:"همبرگر کلاسیک", image:"images/hamburger.jpg" },
     { id:8, name:"چیز برگر", category:"ساندویچ", price:898000, desc:"برگر با پنیر", image:"images/cheese-burger.jpg" },
-    { id:9, name:"ماشروم برگر", category:"ساندویچ", price:928000, desc:"برگر با سس قارچ", image:"images/mushroom-burger.jpg" },
-    { id:10, name:"فیله برگر", category:"ساندویچ", price:998000, desc:"برگر فیله مرغ", image:"images/fillet-burger.jpg" },
-    { id:11, name:"گریل چیکن", category:"ساندویچ", price:658000, desc:"ساندویچ مرغ گریل", image:"images/grill-chicken.jpg" },
-    { id:12, name:"زینگر", category:"ساندویچ", price:658000, desc:"ساندویچ زینگر", image:"images/zinger.jpg" },
+    { id:9, name:"ماشروم برگر", category:"ساندویچ", price:928000, desc:"برگر ماشروم", image:"images/mushroom-burger.jpg" },
+    { id:10, name:"فیله برگر", category:"ساندویچ", price:998000, desc:"فیله برگر", image:"images/fillet-burger.jpg" },
+    { id:11, name:"گریل چیکن", category:"ساندویچ", price:658000, desc:"گریل چیکن", image:"images/grill-chicken.jpg" },
+    { id:12, name:"زینگر", category:"ساندویچ", price:658000, desc:"زینگر", image:"images/zinger.jpg" },
     { id:13, name:"چیکن فیله", category:"ساندویچ", price:628000, desc:"چیکن فیله", image:"images/chicken-fillet.jpg" },
-    { id:14, name:"سالامی", category:"ساندویچ", price:618000, desc:"ساندویچ سالامی", image:"images/salami.jpg" },
+    { id:14, name:"سالامی", category:"ساندویچ", price:618000, desc:"سالامی", image:"images/salami.jpg" },
     { id:15, name:"بیف اسموکی", category:"ساندویچ", price:858000, desc:"بیف اسموکی", image:"images/beef-smoky.jpg" },
     { id:16, name:"ترکی اسموکی", category:"ساندویچ", price:758000, desc:"ترکی اسموکی", image:"images/turkey-smoky.jpg" },
 
@@ -94,25 +65,24 @@ const foods = [
     { id:27, name:"سس چدار", category:"سس ها", price:128000, desc:"سس چدار", image:"images/cheddar-sauce.jpg" },
     { id:28, name:"سس بافالو", category:"سس ها", price:38000, desc:"سس بافالو", image:"images/buffalo-sauce.jpg" },
     { id:29, name:"سس دودی", category:"سس ها", price:128000, desc:"سس دودی", image:"images/smoky-sauce.jpg" },
-    { id:30, name:"سس سانتافه", category:"سس ها", price:0, desc:"سس سانتافه", image:"images/santafe-sauce.jpg" },
 
     // پیش غذا
-    { id:31, name:"سیب زمینی", category:"پیش غذا", price:258000, desc:"سیب زمینی", image:"images/fries.jpg" },
-    { id:32, name:"وایت فرایز", category:"پیش غذا", price:428000, desc:"وایت فرایز", image:"images/white-fries.jpg" },
-    { id:33, name:"قارچ سوخاری", category:"پیش غذا", price:338000, desc:"قارچ سوخاری", image:"images/fried-mushroom.jpg" },
-    { id:34, name:"نان سیر", category:"پیش غذا", price:298000, desc:"نان سیر", image:"images/garlic-bread.jpg" },
-    { id:35, name:"هات شات", category:"پیش غذا", price:338000, desc:"هات شات", image:"images/hot-shot.jpg" },
+    { id:30, name:"سیب زمینی", category:"پیش غذا", price:258000, desc:"سیب زمینی", image:"images/fries.jpg" },
+    { id:31, name:"وایت فرایز", category:"پیش غذا", price:428000, desc:"وایت فرایز", image:"images/white-fries.jpg" },
+    { id:32, name:"قارچ سوخاری", category:"پیش غذا", price:338000, desc:"قارچ سوخاری", image:"images/fried-mushroom.jpg" },
+    { id:33, name:"نان سیر", category:"پیش غذا", price:298000, desc:"نان سیر", image:"images/garlic-bread.jpg" },
+    { id:34, name:"هات شات", category:"پیش غذا", price:338000, desc:"هات شات", image:"images/hot-shot.jpg" },
 
     // سالاد
-    { id:36, name:"سالاد نیک", category:"سالاد", price:0, desc:"سالاد مخصوص نیک فود", image:"images/nik-salad.jpg" },
-    { id:37, name:"سالاد سزار سوخاری", category:"سالاد", price:898000, desc:"سالاد سزار سوخاری", image:"images/caesar-fried.jpg" },
-    { id:38, name:"سالاد سزار گریل", category:"سالاد", price:798000, desc:"سالاد سزار گریل", image:"images/caesar-grill.jpg" },
-    { id:39, name:"سالاد کلم", category:"سالاد", price:0, desc:"سالاد کلم", image:"images/cabbage-salad.jpg" }
+    { id:35, name:"سالاد نیک", category:"سالاد", price:0, desc:"سالاد مخصوص نیک فود", image:"images/nik-salad.jpg" },
+    { id:36, name:"سالاد سزار سوخاری", category:"سالاد", price:898000, desc:"سالاد سزار سوخاری", image:"images/caesar-fried.jpg" },
+    { id:37, name:"سالاد سزار گریل", category:"سالاد", price:798000, desc:"سالاد سزار گریل", image:"images/caesar-grill.jpg" },
+    { id:38, name:"سالاد کلم", category:"سالاد", price:0, desc:"سالاد کلم", image:"images/cabbage-salad.jpg" }
 ];
 
 const categories = ["همه", "پیتزا", "ساندویچ", "سوخاری", "گریل سلامت", "پیش غذا", "سالاد", "سس ها"];
 
-// ==================== توابع رندر ====================
+// ==================== رندر ====================
 function renderCategories() {
     const container = document.getElementById('categories');
     container.innerHTML = '';
@@ -133,11 +103,9 @@ function renderCategories() {
 function renderMenu(filtered) {
     const container = document.getElementById('menuGrid');
     container.innerHTML = '';
-    
-    filtered.forEach((food, index) => {
+    filtered.forEach(food => {
         const card = document.createElement('div');
         card.className = 'food-card';
-        card.style.animationDelay = `${index * 0.08}s`;
         card.innerHTML = `
             <img src="${food.image}" alt="${food.name}">
             <div class="card-body">
@@ -172,7 +140,7 @@ function hideLoading() {
     setTimeout(() => loading.style.display = 'none', 600);
 }
 
-// ==================== اجرا ====================
+// ==================== شروع ====================
 window.onload = () => {
     renderCategories();
     renderMenu(foods);
