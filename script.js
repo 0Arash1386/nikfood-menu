@@ -7,8 +7,6 @@ const sliderImages = [
 ];
 
 let currentSlide = 0;
-let isDragging = false;
-let startX = 0;
 
 function startSlider() {
     const container = document.getElementById('slides');
@@ -21,12 +19,12 @@ function startSlider() {
         container.appendChild(slide);
     });
 
-    const sliderContainer = document.querySelector('.slider');
-
     // Auto Slide
     setInterval(() => {
-        if (!isDragging) nextSlide();
+        currentSlide = (currentSlide + 1) % sliderImages.length;
+        container.style.transform = `translateX(-${currentSlide * 100}%)`;
     }, 4000);
+}
 
     // Swipe Support
     sliderContainer.addEventListener('touchstart', e => {
