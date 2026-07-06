@@ -1,6 +1,9 @@
 // ==================== اسلایدر ====================
 const sliderImages = [
-    "images/slide1.jpg"
+    "images/slide1.jpg",
+    "images/slide2.jpg",
+    "images/slide3.jpg",
+    "images/slide4.jpg"
 ];
 
 let currentSlide = 0;
@@ -138,7 +141,7 @@ function renderMenu(filtered) {
         card.className = 'food-card';
         card.style.animationDelay = `${index * 0.08}s`;
         card.innerHTML = `
-            <img src="\( {food.image}" alt=" \){food.name}">
+            <img src="${food.image}" alt="${food.name}">
             <div class="card-body">
                 <h3>${food.name}</h3>
                 <p>${food.desc}</p>
